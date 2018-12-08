@@ -2665,4 +2665,4 @@ void print_rt_stats(struct seq_file *m, int cpu)
 		print_rt_rq(m, cpu, rt_rq);
 	rcu_read_unlock();
 }
-#endif /* CONFIG_SCHED_DEBUG */
+#endif /* CONFIG_SCHED_DEBUG */ 

@@ -398,7 +398,7 @@ void sched_account_irqstart(int cpu, struct task_struct *curr, u64 wallclock)
 		return;
 
 	/*
-	 * We don’t have to note down an irqstart event when cycle
+	 * We don't have to note down an irqstart event when cycle
 	 * counter is not used.
 	 */
 	if (!use_cycle_counter)
@@ -709,7 +709,6 @@ static inline void inter_cluster_migration_fixup
 static u32 load_to_index(u32 load)
 {
 	u32 index = load / sched_load_granule;
-
 	return min(index, (u32)(NUM_LOAD_INDICES - 1));
 }
 
@@ -3170,7 +3169,6 @@ void walt_irq_work(struct irq_work *irq_work)
 	struct rq *rq;
 	int cpu;
 	u64 wc;
-	int flag = SCHED_CPUFREQ_WALT;
 	bool is_migration = false;
 	int level = 0;
 
@@ -3211,16 +3209,16 @@ void walt_irq_work(struct irq_work *irq_work)
 
 	for_each_sched_cluster(cluster) {
 		for_each_cpu(cpu, &cluster->cpus) {
-			int nflag = flag;
+			int nflag = 0;
 
 			rq = cpu_rq(cpu);
 
 			if (is_migration) {
 				if (rq->notif_pending) {
-					nflag |= SCHED_CPUFREQ_INTERCLUSTER_MIG;
+					nflag = SCHED_CPUFREQ_INTERCLUSTER_MIG;
 					rq->notif_pending = false;
 				} else {
-					nflag |= SCHED_CPUFREQ_FORCE_UPDATE;
+					nflag = SCHED_CPUFREQ_FORCE_UPDATE;
 				}
 			}
 
@@ -3333,4 +3331,4 @@ void walt_sched_init(struct rq *rq)
 
 	walt_cpu_util_freq_divisor =
 	    (sched_ravg_window >> SCHED_CAPACITY_SHIFT) * 100;
-}
+} 
