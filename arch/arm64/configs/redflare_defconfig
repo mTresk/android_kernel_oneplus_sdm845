@@ -1,8 +1,4 @@
-#
-# Automatically generated file; DO NOT EDIT.
-# Linux/arm64 4.9.112 Kernel Configuration
-#
-CONFIG_LOCALVERSION="-RedFlare-Kernel-v3.26"
+CONFIG_LOCALVERSION="-RedFlare-Kernel-v3.27"
 CONFIG_ARM64=y
 CONFIG_64BIT=y
 CONFIG_ARCH_PHYS_ADDR_T_64BIT=y
